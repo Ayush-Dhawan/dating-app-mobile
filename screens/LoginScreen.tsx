@@ -1,8 +1,8 @@
-import { View, Text, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { useLayoutEffect } from 'react'
+import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { useAuthContext } from '../contexts/AuthContext'
 import { client } from '../utils/kindeConfig';
-import { storeData } from '../services/async-storage';
+import { getData, storeData } from '../services/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
 export default function LoginScreen() {
@@ -13,6 +13,8 @@ const navigation = useNavigation();
       headerShown : false
     })
   }, [])
+
+
 
   const {setLoggedIn} = useAuthContext();
 
@@ -28,7 +30,7 @@ const navigation = useNavigation();
     }
   };
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ImageBackground
       style={{height: '100%'}}
       source={{uri: "https://tinder.com/static/tinder.png"}}
@@ -37,7 +39,7 @@ const navigation = useNavigation();
           <Text style={{textAlign: 'center', fontWeight: '600'}}>Sign in & get swiping</Text>
         </TouchableOpacity>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   )
 }
 

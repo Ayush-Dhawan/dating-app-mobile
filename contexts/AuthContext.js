@@ -1,23 +1,26 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getData } from "../services/async-storage";
+import { client } from "../utils/kindeConfig";
 
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
 
-  useEffect(() =>{
-    checkUserAuth();
-  }, [])
-
-  const checkUserAuth = async () =>{
-    const result = await getData('login');
-    if(result !== 'true') setLoggedIn(false);
+  async function getUserInfo(){
+    const userData = await client.getUserDetails();
+    setUserInfo(userData);
+    console.log(userData)
   }
+
+  useEffect(()=>{
+    getUserInfo();
+  }, [])
 
 
   return (
-    <AuthContext.Provider value={{ loggedIn, setLoggedIn }}>
+    <AuthContext.Provider value={{ loggedIn, setLoggedIn, userInfo }}>
       {children}
     </AuthContext.Provider>
   );
