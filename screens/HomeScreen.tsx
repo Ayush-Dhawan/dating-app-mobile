@@ -70,7 +70,8 @@ export default function HomeScreen() {
         <TouchableOpacity onPress={handleLogout}>
             <Image style={styles.pfp} source={{uri: userInfo.picture}} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        {/* @ts-ignore */}
+        <TouchableOpacity onPress={() => navigation.navigate("Modal")}>
             <Image style={{height: 65, width: 65}} source={require('../images/Tinder-Emblem.png')} />
         </TouchableOpacity>
         {/* @ts-ignore */}

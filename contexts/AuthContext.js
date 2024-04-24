@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getData } from "../services/async-storage";
 import { client } from "../utils/kindeConfig";
+import { addUser } from "../services/userAPI";
 
 const AuthContext = createContext();
 
